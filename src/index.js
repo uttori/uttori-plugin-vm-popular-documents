@@ -101,6 +101,7 @@ class ViewModelPopularDocuments {
    * @static
    */
   static register(context) {
+    debug('register');
     if (!context || !context.hooks || typeof context.hooks.on !== 'function') {
       throw new Error("Missing event dispatcher in 'context.hooks.on(event, callback)' format.");
     }
