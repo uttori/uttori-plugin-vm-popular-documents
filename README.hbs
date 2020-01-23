@@ -1,0 +1,65 @@
+[![view on npm](http://img.shields.io/npm/v/uttori-plugin-vm-popular-documents.svg)](https://www.npmjs.org/package/uttori-plugin-vm-popular-documents)
+[![npm module downloads](http://img.shields.io/npm/dt/uttori-plugin-vm-popular-documents.svg)](https://www.npmjs.org/package/uttori-plugin-vm-popular-documents)
+[![Build Status](https://travis-ci.org/uttori/uttori-plugin-vm-popular-documents.svg?branch=master)](https://travis-ci.org/uttori/uttori-plugin-vm-popular-documents)
+[![Dependency Status](https://david-dm.org/uttori/uttori-plugin-vm-popular-documents.svg)](https://david-dm.org/uttori/uttori-plugin-vm-popular-documents)
+[![Coverage Status](https://coveralls.io/repos/uttori/uttori-plugin-vm-popular-documents/badge.svg?branch=master)](https://coveralls.io/r/uttori/uttori-plugin-vm-popular-documents?branch=master)
+
+# Uttori View Model Enrichment - Popular Documents
+
+A plugin to expose and add popular documents to a view-model or other object.
+
+## Install
+
+```bash
+npm install --save uttori-plugin-vm-popular-documents
+```
+
+## Dependencies
+
+There must be a plugin registered with the hooks to listen for a `popular-documents` event and respond with an array of the slugs of the popular documents.
+
+## Config
+
+```js
+{
+  // Registration Events
+  events: {
+    callback: ['view-model-home'],
+  },
+
+  // Key to use in the view model
+  key: 'popularDocuments',
+
+  // Number of documents to return.
+  limit: 10,
+
+  // A list of slugs to ignore when considering popularity.
+  ignore_slugs: [],
+}
+```
+
+* * *
+
+## API Reference
+
+{{>main}}
+
+* * *
+
+## Tests
+
+To run the test suite, first install the dependencies, then run `npm test`:
+
+```bash
+npm install
+npm test
+DEBUG=Uttori* npm test
+```
+
+## Contributors
+
+* [Matthew Callis](https://github.com/MatthewCallis)
+
+## License
+
+* [MIT](LICENSE)
