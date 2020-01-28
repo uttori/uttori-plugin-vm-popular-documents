@@ -19,7 +19,7 @@
     "ramda": "^0.26.1"
   },
   "devDependencies": {
-    "ava": "^3.0.0",
+    "ava": "^3.1.0",
     "coveralls": "^3.0.9",
     "docsify-cli": "^4.4.0",
     "eslint": "^6.8.0",
@@ -67,10 +67,10 @@
   },
   "scripts": {
     "docs": "jsdoc2md --private --example-lang js --template README.hbs src/index.js > README.md; cp README.md docs/README.md",
-    "docs-serve": "docsify serve ./docs",
+    "docs-serve": "docsify init ./docs && docsify serve ./docs",
     "lint": "eslint .",
     "report": "nyc report --reporter=html",
-    "test": "NODE_ENV=test nyc ava --serial --concurrency=1",
+    "test": "NODE_ENV=test nyc ava",
     "test-debug": "DEBUG=Uttori* NODE_ENV=test nyc ava --serial --concurrency=1",
     "validate": "npm ls"
   }

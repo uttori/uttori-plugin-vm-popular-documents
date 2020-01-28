@@ -4,7 +4,7 @@ const R = require('ramda');
 /**
  * Uttori View Model Enrichment - Popular Documents
  * @example <caption>ViewModelPopularDocuments</caption>
- * const sitemap = ViewModelPopularDocuments.generate({ ... });
+ * const viewModel = ViewModelPopularDocuments.callback(viewModel, context);
  * @class
  */
 class ViewModelPopularDocuments {

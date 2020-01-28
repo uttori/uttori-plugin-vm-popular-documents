@@ -50,7 +50,7 @@ test('ViewModelPopularDocuments.defaultConfig(): can return a default config', (
   t.notThrows(ViewModelPopularDocuments.defaultConfig);
 });
 
-test('ViewModelPopularDocuments.validateConfig(config, _context): throws when sitemaps key is missing', (t) => {
+test('ViewModelPopularDocuments.validateConfig(config, _context): throws when configuration key is missing', (t) => {
   t.throws(() => {
     ViewModelPopularDocuments.validateConfig({});
   }, { message: 'Config Error: \'uttori-plugin-vm-popular-documents\' configuration key is missing.' });
