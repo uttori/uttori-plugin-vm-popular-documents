@@ -11,7 +11,7 @@ const config = {
   },
 };
 const hooks = {
-  fetch: () => ['good-title', 'fake-title'],
+  fetch: () => [['good-title', 'fake-title']],
 };
 const storageProvider = {
   getQuery: (_query) => [
@@ -117,7 +117,7 @@ test('ViewModelPopularDocuments.callback(viewModel, context): does not fail when
   });
 });
 
-test('ViewModelPopularDocuments.callback(viewModel, context): adds an empty array when limit is less than 1', async (t) => {
+test('ViewModelPopularDocuments.callback(viewModel, context): returns an empty array when limit is less than 1', async (t) => {
   t.plan(1);
   const viewModel = {};
   const output = await ViewModelPopularDocuments.callback(viewModel, { config: { ...config, [ViewModelPopularDocuments.configKey]: { key: 'popDocs', limit: 0 } }, storageProvider });

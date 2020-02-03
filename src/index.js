@@ -155,7 +155,8 @@ class ViewModelPopularDocuments {
     let results = [];
     let popular = [];
     try {
-      popular = await context.hooks.fetch('popular-documents', { limit }, context);
+      [popular] = await context.hooks.fetch('popular-documents', { limit }, context);
+      /* istanbul ignore else */
       if (Array.isArray(popular) && popular.length > 0) {
         debug('popular:', popular.length);
         popular = R.reverse(R.pluck('slug')(popular));
