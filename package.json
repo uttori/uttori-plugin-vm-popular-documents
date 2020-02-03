@@ -1,6 +1,6 @@
 {
   "name": "uttori-plugin-vm-popular-documents",
-  "version": "1.1.0",
+  "version": "1.1.1-pre",
   "description": "A plugin to add popular documents to the view model.",
   "author": "Matthew Callis <matthew.callis@gmail.com>",
   "contributors": [],
