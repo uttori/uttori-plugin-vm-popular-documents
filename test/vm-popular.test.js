@@ -1,6 +1,7 @@
+// @ts-nocheck
 /* eslint-disable security/detect-non-literal-fs-filename */
 const test = require('ava');
-const ViewModelPopularDocuments = require('../src');
+const { ViewModelPopularDocuments } = require('../src');
 
 const config = {
   [ViewModelPopularDocuments.configKey]: {
@@ -11,21 +12,30 @@ const config = {
   },
 };
 const hooks = {
-  fetch: () => [['good-title', 'fake-title']],
-};
-const storageProvider = {
-  getQuery: (_query) => [
-    {
-      updateDate: null,
-      createDate: new Date('2019-04-20').toISOString(),
-      slug: 'good-title',
-    },
-    {
-      updateDate: new Date('2019-04-21').toISOString(),
-      createDate: new Date('2019-04-21').toISOString(),
-      slug: 'fake-title',
-    },
-  ],
+  fetch: (event) => {
+    switch (event) {
+      case 'popular-documents': {
+        return ['good-title', 'fake-title'];
+      }
+      case 'storage-query': {
+        return [
+          {
+            updateDate: null,
+            createDate: new Date('2019-04-20').toISOString(),
+            slug: 'good-title',
+          },
+          {
+            updateDate: new Date('2019-04-21').toISOString(),
+            createDate: new Date('2019-04-21').toISOString(),
+            slug: 'fake-title',
+          },
+        ];
+      }
+      default: {
+        throw new Error(`Unknown Event: ${event}`);
+      }
+    }
+  },
 };
 
 test('ViewModelPopularDocuments.register(context): can register', (t) => {
@@ -86,7 +96,6 @@ test('ViewModelPopularDocuments.validateConfig(config, _context): throws when ke
   }, { message: 'Config Error: `key` should be a valid Object key string.' });
 });
 
-
 test('ViewModelPopularDocuments.validateConfig(config, _context): can validate', (t) => {
   t.notThrows(() => {
     ViewModelPopularDocuments.validateConfig({
@@ -102,7 +111,7 @@ test('ViewModelPopularDocuments.validateConfig(config, _context): can validate',
 test('ViewModelPopularDocuments.callback(viewModel, context): does not fail when hooks are missing', async (t) => {
   t.plan(1);
   const viewModel = {};
-  const output = await ViewModelPopularDocuments.callback(viewModel, { config, storageProvider });
+  const output = await ViewModelPopularDocuments.callback(viewModel, { config });
   t.deepEqual(output, {
     popDocs: [],
   });
@@ -111,7 +120,7 @@ test('ViewModelPopularDocuments.callback(viewModel, context): does not fail when
 test('ViewModelPopularDocuments.callback(viewModel, context): does not fail when there are no popular documents', async (t) => {
   t.plan(1);
   const viewModel = {};
-  const output = await ViewModelPopularDocuments.callback(viewModel, { config, hooks: { fetch: () => Promise.resolve(null) }, storageProvider });
+  const output = await ViewModelPopularDocuments.callback(viewModel, { config, hooks: { fetch: () => Promise.resolve(null) } });
   t.deepEqual(output, {
     popDocs: [],
   });
@@ -120,7 +129,7 @@ test('ViewModelPopularDocuments.callback(viewModel, context): does not fail when
 test('ViewModelPopularDocuments.callback(viewModel, context): returns an empty array when limit is less than 1', async (t) => {
   t.plan(1);
   const viewModel = {};
-  const output = await ViewModelPopularDocuments.callback(viewModel, { config: { ...config, [ViewModelPopularDocuments.configKey]: { key: 'popDocs', limit: 0 } }, storageProvider });
+  const output = await ViewModelPopularDocuments.callback(viewModel, { config: { ...config, [ViewModelPopularDocuments.configKey]: { key: 'popDocs', limit: 0 } }, hooks });
   t.deepEqual(output, {
     popDocs: [],
   });
@@ -129,7 +138,7 @@ test('ViewModelPopularDocuments.callback(viewModel, context): returns an empty a
 test('ViewModelPopularDocuments.callback(viewModel, context): can return popular documents', async (t) => {
   t.plan(1);
   const viewModel = {};
-  const output = await ViewModelPopularDocuments.callback(viewModel, { config, hooks, storageProvider });
+  const output = await ViewModelPopularDocuments.callback(viewModel, { config, hooks });
   t.deepEqual(output, {
     popDocs: [
       {
