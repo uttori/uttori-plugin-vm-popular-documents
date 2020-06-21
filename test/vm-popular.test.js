@@ -15,20 +15,22 @@ const hooks = {
   fetch: (event) => {
     switch (event) {
       case 'popular-documents': {
-        return ['good-title', 'fake-title'];
+        return [['good-title', 'fake-title']];
       }
       case 'storage-query': {
         return [
-          {
-            updateDate: null,
-            createDate: new Date('2019-04-20').toISOString(),
-            slug: 'good-title',
-          },
-          {
-            updateDate: new Date('2019-04-21').toISOString(),
-            createDate: new Date('2019-04-21').toISOString(),
-            slug: 'fake-title',
-          },
+          [
+            {
+              updateDate: null,
+              createDate: new Date('2019-04-20').toISOString(),
+              slug: 'good-title',
+            },
+            {
+              updateDate: new Date('2019-04-21').toISOString(),
+              createDate: new Date('2019-04-21').toISOString(),
+              slug: 'fake-title',
+            },
+          ],
         ];
       }
       default: {
