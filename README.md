@@ -1,5 +1,5 @@
-[![view on npm](http://img.shields.io/npm/v/@uttori/plugin-vm-popular-documents.svg)](https://www.npmjs.com/package/@uttori/plugin-vm-popular-documents)
-[![npm module downloads](http://img.shields.io/npm/dt/@uttori/plugin-vm-popular-documents.svg)](https://www.npmjs.com/package/@uttori/plugin-vm-popular-documents)
+[![view on npm](https://img.shields.io/npm/v/@uttori/plugin-vm-popular-documents.svg)](https://www.npmjs.com/package/@uttori/plugin-vm-popular-documents)
+[![npm module downloads](https://img.shields.io/npm/dt/@uttori/plugin-vm-popular-documents.svg)](https://www.npmjs.com/package/@uttori/plugin-vm-popular-documents)
 [![Build Status](https://travis-ci.org/uttori/uttori-plugin-vm-popular-documents.svg?branch=master)](https://travis-ci.org/uttori/uttori-plugin-vm-popular-documents)
 [![Dependency Status](https://david-dm.org/uttori/uttori-plugin-vm-popular-documents.svg)](https://david-dm.org/uttori/uttori-plugin-vm-popular-documents)
 [![Coverage Status](https://coveralls.io/repos/uttori/uttori-plugin-vm-popular-documents/badge.svg?branch=master)](https://coveralls.io/r/uttori/uttori-plugin-vm-popular-documents?branch=master)
