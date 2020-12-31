@@ -15,7 +15,10 @@ const hooks = {
   fetch: (event) => {
     switch (event) {
       case 'popular-documents': {
-        return [['good-title', 'fake-title']];
+        return [
+          { slug: 'good-title' },
+          { slug: 'fake-title' },
+        ];
       }
       case 'storage-query': {
         return [
@@ -54,7 +57,7 @@ test('ViewModelPopularDocuments.register(context): errors without event dispatch
 
 test('ViewModelPopularDocuments.register(context): errors without events', (t) => {
   t.throws(() => {
-    ViewModelPopularDocuments.register({ hooks: { on: () => {} }, config: { [ViewModelPopularDocuments.configKey]: { } } });
+    ViewModelPopularDocuments.register({ hooks: { on: () => {} }, config: { [ViewModelPopularDocuments.configKey]: {} } });
   }, { message: 'Missing events to listen to for in \'config.events\'.' });
 });
 
@@ -172,5 +175,44 @@ test('ViewModelPopularDocuments.callback(viewModel, context): can return popular
         slug: 'fake-title',
       },
     ],
+  });
+});
+
+test('ViewModelPopularDocuments.callback(viewModel, context): can handle documents without any popular documents', async (t) => {
+  t.plan(1);
+  const viewModel = {};
+  const output = await ViewModelPopularDocuments.callback(viewModel, {
+    config,
+    hooks: {
+      fetch: (event) => {
+        switch (event) {
+          case 'popular-documents': {
+            return [];
+          }
+          case 'storage-query': {
+            return [
+              [
+                {
+                  updateDate: null,
+                  createDate: new Date('2019-04-20').toISOString(),
+                  slug: 'good-title',
+                },
+                {
+                  updateDate: new Date('2019-04-21').toISOString(),
+                  createDate: new Date('2019-04-21').toISOString(),
+                  slug: 'fake-title',
+                },
+              ],
+            ];
+          }
+          default: {
+            throw new Error(`Unknown Event: ${event}`);
+          }
+        }
+      },
+    },
+  });
+  t.deepEqual(output, {
+    popDocs: [],
   });
 });

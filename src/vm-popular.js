@@ -1,4 +1,4 @@
-const debug = require('debug')('Uttori.Plugin.ViewModel.PopularDocuments');
+let debug = () => {}; try { debug = require('debug')('Uttori.Plugin.ViewModel.PopularDocuments'); } catch {}
 const R = require('ramda');
 
 /**
@@ -165,11 +165,11 @@ class ViewModelPopularDocuments {
     let results = [];
     let popular = [];
     try {
-      [popular] = await context.hooks.fetch('popular-documents', { limit }, context);
-      /* istanbul ignore else */
+      popular = await context.hooks.fetch('popular-documents', { limit }, context);
+      debug('popular:', popular.length);
       if (Array.isArray(popular) && popular.length > 0) {
         debug('popular:', popular.length);
-        popular = R.reverse(R.pluck('slug')(popular));
+        popular = popular.map((p) => p.slug);
         const slugs = `"${popular.join('", "')}"`;
         const not_in = `"${ignore_slugs.join('", "')}"`;
         const query = `SELECT * FROM documents WHERE slug NOT_IN (${not_in}) AND slug IN (${slugs}) ORDER BY updateDate DESC LIMIT ${limit}`;
