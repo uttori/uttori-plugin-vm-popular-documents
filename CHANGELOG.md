@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.1.0](https://github.com/uttori/uttori-plugin-vm-popular-documents/compare/v3.0.0...v3.1.0) - 2020-01-02
+
+- 🎁 Update dev dependencies
+- 🛠 Revert to old format expected from `popular-documents`
+
 ## [3.0.0](https://github.com/uttori/uttori-plugin-vm-popular-documents/compare/v2.1.3...v3.0.0) - 2020-12-31
 
 - 🧰 Make `debug` an optional dependency

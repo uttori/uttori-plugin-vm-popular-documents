@@ -16,8 +16,10 @@ const hooks = {
     switch (event) {
       case 'popular-documents': {
         return [
-          { slug: 'good-title' },
-          { slug: 'fake-title' },
+          [
+            { slug: 'good-title' },
+            { slug: 'fake-title' },
+          ],
         ];
       }
       case 'storage-query': {

@@ -165,18 +165,16 @@ class ViewModelPopularDocuments {
     let results = [];
     let popular = [];
     try {
-      popular = await context.hooks.fetch('popular-documents', { limit }, context);
+      [popular] = await context.hooks.fetch('popular-documents', { limit }, context);
       debug('popular:', popular.length);
+      /* istanbul ignore else */
       if (Array.isArray(popular) && popular.length > 0) {
-        debug('popular:', popular.length);
         popular = popular.map((p) => p.slug);
         const slugs = `"${popular.join('", "')}"`;
         const not_in = `"${ignore_slugs.join('", "')}"`;
         const query = `SELECT * FROM documents WHERE slug NOT_IN (${not_in}) AND slug IN (${slugs}) ORDER BY updateDate DESC LIMIT ${limit}`;
         [results] = await context.hooks.fetch('storage-query', query);
         results = R.sortBy(R.pipe(R.prop('slug'), R.indexOf(R.__, popular)))(results);
-      } else {
-        debug('No popular documents returned');
       }
     } catch (error) {
       debug('Error:', error);
