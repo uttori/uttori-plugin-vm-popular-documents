@@ -4,6 +4,10 @@
 [![Dependency Status](https://david-dm.org/uttori/uttori-plugin-vm-popular-documents.svg)](https://david-dm.org/uttori/uttori-plugin-vm-popular-documents)
 [![Coverage Status](https://coveralls.io/repos/uttori/uttori-plugin-vm-popular-documents/badge.svg?branch=master)](https://coveralls.io/r/uttori/uttori-plugin-vm-popular-documents?branch=master)
 
+# Package Moved
+
+This has been added to the core https://github.com/uttori/uttori-wiki package.
+
 # Uttori View Model Enrichment Plugin - Popular Documents
 
 A plugin to expose and add popular documents to a view-model or other object.
